@@ -8,9 +8,8 @@ type PageProps = {
 }
 
 const fetchTodo = async (todoId: string) => {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`)
+  const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, { next: { revalidate: 60 } })
   const todo: Todo = await response.json()
-  console.log(todo)
   return todo
 }
 
@@ -27,4 +26,22 @@ const TodoPage = async ({ params: { todoId } }: PageProps) => {
   )
 }
 
-export default TodoPage
+export default TodoPage;
+
+export async function generateStaticPaths() {
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos')
+  const todos: Todo[] = await response.json();
+
+  const trimmedTodos = todos.slice(0, 10); 
+
+  const paths = trimmedTodos.map((todo) => ({
+    params: {
+      todoId: todo.id.toString(),
+    },
+  }))
+
+  return {
+    paths,
+    fallback: false,
+  }
+}
