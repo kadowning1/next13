@@ -32,7 +32,7 @@ const TodoPage = async ({ params: { todoId } }: PageProps) => {
 
 export default TodoPage;
 
-export async function generateStaticPaths() {
+async function path() {
   const response = await fetch('https://jsonplaceholder.typicode.com/todos')
   const todos: Todo[] = await response.json();
 
