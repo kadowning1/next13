@@ -4,8 +4,7 @@ import TodoList from './TodoList'
 const Todos = () => {
   return (
     <div className='bg-purple-300'>
-      {/* @ts-ignore */}
-      <TodoList />
+      <h1>Todos Selected</h1>
     </div>
   )
 }

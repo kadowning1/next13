@@ -5,6 +5,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <head>
+        <title>
+          App
+        </title>
       </head>
       <body>
         <Header />
